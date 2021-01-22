@@ -6,41 +6,86 @@ import AddTodo from "./components/AddTodo";
 import TodosCount from "./components/TodosCount";
 
 class App extends React.Component {
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
 
     this.appName = 'Simple Todo App ';
 
     this.state = {
-      "todos" :[
-      {
-        "userId": 1,
-        "id": 1,
-        "title": "delectus aut autem",
-        "completed": true
-      },
-      {
-        "userId": 1,
-        "id": 2,
-        "title": "quis ut nam facilis et officia qui",
-        "completed": false
-      }
-      ]
+      error: null,
+      isLoaded: false,
+      todos: [],
+      length:0
+    };
+  }
+  componentDidMount(){
+
+    fetch("https://jsonplaceholder.typicode.com/todos")
+      .then(res => res.json())
+      .then(
+        (result) => {
+          this.setState({
+            isLoaded: true,
+    
+          });
+        },
+      
+        (error) => {
+          this.setState({
+            isLoaded: true,
+            error
+          });
+        }
+      )
+  }
+
+  addTodo = (todoTitle)=>{
+    const id= this.state.length +1;
+    this.setState((prevState)=>{return{length:++prevState.length}});
+    const newTodo = {
+      "userId": 1,
+      "id": id,
+      "title": todoTitle,
+      "completed": false
     }
+
+    this.setState({"todos":[...this.state.todos,newTodo]});
+  }
+
+  removeTodo = (todoId)=>{
+    const todos = this.state.todos.filter(todo=>todo.id !== todoId);
+    this.setState({todos});
+  }
+
+  toggleComplete = (todoId)=>{
+    const todos = this.state.todos.map(
+      todo=>todo.id===todoId ? {...todo,completed:!todo.completed} : {...todo}
+    );
+    this.setState({todos:todos});
   }
 
   render(){
+    const { error, isLoaded } = this.state;
+    if (error) {
+      return <div>Error: {error.message}</div>;
+    } else if (!isLoaded) {
+      return <div>Loading...</div>;
+    } else {
     return (
-    <div className="page">
-      <Header appName={this.appName}/>
-      <main class="todoApp">
-        <AddTodo />
-        <TodoList todos={this.state.todos} />
-        <TodosCount count={this.state.todos.length}/>
-      </main>
-    </div>
+      <div className="page">
+        <Header appName={this.appName}/>
+        <main className="todoApp">
+          <AddTodo addTodo={this.addTodo}/>
+          <TodoList
+            todos={this.state.todos}
+            removeTodo={this.removeTodo}
+            toggleComplete={this.toggleComplete}/>
+          <TodosCount /*count={this.state.todos.length}*//>
+        </main>
+      </div>
     )
   }
+}
 }
 
 export default App;

@@ -1,21 +1,24 @@
-import React from "react";
-import {DeleteOutlined} from '@ant-design/icons'
-import {CheckOutlined} from '@ant-design/icons'
-import { Button } from 'antd';
-function TodoItem(props) {
-  return (
-    <>
-      <li className={props.completed ? "completed" : "uncompleted"}>
-        {props.id}: {props.title}
-        <div className='removeTodo'>
-        <Button className='binBtn' ><DeleteOutlined className='bin'/></Button>
-        </div>
-        <div className='completeTodo'>
-            <Button className='checkBtn'><CheckOutlined className='check'/></Button>
-        </div>
-      </li>
-    </>
-  )
+import React from 'react';
+
+const TodoItem = ( {todo, removeTodo,toggleComplete} ) => {
+	const handleRemove = (e)=>{
+		console.log(`delete click`);
+		removeTodo(todo.id)
+	}
+
+	const handleToggleComplete = (e)=>{
+		toggleComplete(todo.id);
+	}
+
+
+	return (
+		<li>
+			<span className="todoID">{todo.id}.</span>
+			<span className={"title "+ (todo.completed ? "completed" : "")} onClick={handleToggleComplete}>{todo.title}</span>
+			<div className="removeTodo" onClick={handleRemove}><i className="far fa-trash-alt"></i></div>
+			<div className="togleComplete" onClick={handleToggleComplete}><i className={"far "+(todo.completed ? "fa-check-square":"fa-square")}></i></div>
+		</li>
+	 );
 }
 
 export default TodoItem;

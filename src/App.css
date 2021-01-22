@@ -3,7 +3,7 @@
   background: #333;
   padding-top: 3em;
 }
-.header{
+header{
   font-size: 2em;
   color: aquamarine;
   text-align: center;
@@ -73,32 +73,37 @@
   background: #777;
 }
 
-.removeTodo,.editTodo{
+.todoListItems li .title{
+  cursor: pointer;
+}
+
+.removeTodo,.editTodo, .togleComplete{
   float: right;
   width: 2em;
   height: 100%;
   text-align: center;
   box-sizing: border-box;
-  color: #FF7E7E;
+  /* color: #FF7E7E; */
+  color: aquamarine;
 }
-.removeTodo:hover, .editTodo:hover{
+.removeTodo:hover, .editTodo:hover, .togleComplete:hover{
   cursor: pointer;
 }
 
 /* stretch icon to containing div */
-.removeTodo i, .editTodo i{
+.removeTodo i, .editTodo i,.togleComplete i{
   display: block;
   width: 100%;
   height: 100%;
   opacity: .7;
 }
-.removeTodo i::before, .editTodo i::before{
+.removeTodo i::before, .editTodo i::before,.togleComplete i::before{
   vertical-align: middle;
   line-height: 3em;
   opacity: .7;
 }
 
-.removeTodo:hover i::before, .editTodo:hover i::before{
+.removeTodo:hover i::before, .editTodo:hover i::before, .togleComplete:hover i::before{
   opacity: 1;
 }
 
@@ -107,51 +112,4 @@
 }
 .completed{
   text-decoration: line-through;
-}
-.completeTodo{
-  float: right;
-  width: 1em;
-  height: 100%;
-  text-align: center;
-  box-sizing: border-box;
-  color: #12c521;
-  padding-right: 2%;
-}
-.completeTodo:hover{
-  cursor: pointer;
-}
-
-/* stretch icon to containing div */
-.completeTodo i{
-  display: block;
-  width: 50%;
-  height: 100%;
-  opacity: .7;
-}
-.completeTodo i::before{
-  vertical-align: middle;
-  line-height: 3em;
-  opacity: .7;
-}
-
-.completeTodo:hover i::before{
-  opacity: 1;
-}
-.binBtn{
-  background-color: transparent;border: none;
-}
-.checkBtn{
-  background-color: transparent;border: none;
-}
-.bin{
-  color: rgb(211, 108, 108);
-}
-.check{
-  color: #92ce97;
-}
-.bin:hover{
-  color: red;
-}
-.check:hover{
-  color:#05a812;
 }

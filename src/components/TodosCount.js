@@ -1,8 +1,9 @@
-import React from 'react'
+import React from 'react';
 
-function TodosCount(props){
-    return <h4><i>total items: {props.count}</i></h4>
+const TodosCount = (props) => {
+	return (
+		<div className="total">total items: <span className="output">{props.count}</span></div>
+	)
 }
 
-
-export default TodosCount
+export default TodosCount;

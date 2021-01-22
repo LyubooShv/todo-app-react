@@ -1,8 +1,9 @@
-import React from 'react'
+import React from 'react';
 
-function Header(props){
-    return <h1 className='header'><i>Simple Todo App</i></h1>
+const Header = (props) => {
+	return (
+		<header>{props.appName}</header>
+	)
 }
 
-
-export default Header
+export default Header;
