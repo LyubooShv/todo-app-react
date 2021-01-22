@@ -80,7 +80,7 @@ class App extends React.Component {
             todos={this.state.todos}
             removeTodo={this.removeTodo}
             toggleComplete={this.toggleComplete}/>
-          <TodosCount /*count={this.state.todos.length}*//>
+          <TodosCount count={this.state.todos.length}/>
         </main>
       </div>
     )
