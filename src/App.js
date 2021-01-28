@@ -15,7 +15,6 @@ class App extends React.Component {
       error: null,
       isLoaded: false,
       todos: [],
-      length:0
     };
   }
   componentDidMount(){
