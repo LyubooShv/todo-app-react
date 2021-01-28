@@ -26,6 +26,7 @@ class App extends React.Component {
         (result) => {
           this.setState({
             isLoaded: true,
+           todos: result
     
           });
         },
@@ -40,7 +41,7 @@ class App extends React.Component {
   }
 
   addTodo = (todoTitle)=>{
-    const id= this.state.length +1;
+    const id= this.state.todos.length +1;
     this.setState((prevState)=>{return{length:++prevState.length}});
     const newTodo = {
       "userId": 1,
@@ -65,15 +66,16 @@ class App extends React.Component {
   }
 
   render(){
-    const { error, isLoaded } = this.state;
+    const { error, isLoaded} = this.state;
     if (error) {
       return <div>Error: {error.message}</div>;
     } else if (!isLoaded) {
       return <div>Loading...</div>;
     } else {
     return (
-      <div className="page">
-        <Header appName={this.appName}/>
+      
+        <div>
+         <Header appName={this.appName}/>
         <main className="todoApp">
           <AddTodo addTodo={this.addTodo}/>
           <TodoList
@@ -81,7 +83,7 @@ class App extends React.Component {
             removeTodo={this.removeTodo}
             toggleComplete={this.toggleComplete}/>
           <TodosCount count={this.state.todos.length}/>
-        </main>
+        </main> 
       </div>
     )
   }

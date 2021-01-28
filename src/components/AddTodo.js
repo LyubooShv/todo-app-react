@@ -17,6 +17,7 @@ class AddTodo extends React.Component {
 
 	handleClick = (e)=>{
 		this.props.addTodo(this.state.todoTitle);
+		this.setState({todoTitle:''});
 	}
 
 	render(){
